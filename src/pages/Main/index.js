@@ -72,8 +72,12 @@ export default function Main() {
       
     }
   }
+  let cardSize = 0;
 
-  
+  function getCardSize (event){
+    cardSize = event.nativeEvent.layout.height;
+    alert("lerolero");
+  };
 
   return (
     
@@ -86,11 +90,11 @@ export default function Main() {
           onGestureEvent={animatedEvent}
           onHandlerStateChange={onHandlerStateChange}
         >
-          <Card style={{
+          <Card onLayout={getCardSize} style={{
             transform:[{
               translateY: translateY.interpolate({
                 inputRange: [-350,0, 380],
-                outputRange: [-20 ,0, screenHeight/2 ],
+                outputRange: [-20 ,0, screenHeight/2 + screenHeight/2*0.5],
                 extrapolate: 'clamp',
               }),
 
