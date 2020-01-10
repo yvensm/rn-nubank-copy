@@ -1,9 +1,10 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {Animated} from 'react-native';
+import {Animated, Dimensions} from 'react-native';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
 
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 import Header from '~/components/Header';
 import Tabs from '~/components/Tabs';
 import Menu from '~/components/Menu';
@@ -23,6 +24,13 @@ import {
 
 
 export default function Main() {
+  //Muda cor dos botões de navegação
+  changeNavigationBarColor("#8B10AE");
+  const screenWidth = Math.round(Dimensions.get('window').width);
+  const screenHeight = Math.round(Dimensions.get('window').height);
+  
+  
+
   const translateY = new Animated.Value(0);
   let offset = 0;
 
@@ -65,7 +73,10 @@ export default function Main() {
     }
   }
 
+  
+
   return (
+    
     <Container>
       <Header />
       <Content>
@@ -79,9 +90,10 @@ export default function Main() {
             transform:[{
               translateY: translateY.interpolate({
                 inputRange: [-350,0, 380],
-                outputRange: [-20 ,0, 380],
+                outputRange: [-20 ,0, screenHeight/2 ],
                 extrapolate: 'clamp',
               }),
+
             }],
           }}
           >
