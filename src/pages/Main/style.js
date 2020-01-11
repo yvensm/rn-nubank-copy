@@ -5,13 +5,16 @@ export const Container = styled.View`
   flex:1;
   background: #8B10AE;
   justify-content:center;
+  
 `;
 
 
 export const Content = styled.View`
   flex: 1;
-  max-height: 50%;
+  max-height: 70%;
   z-index: 5;
+  justify-content:center;
+  align-items:center;
 `;
 
 export const Card = styled(Animated.View)`
@@ -19,11 +22,11 @@ export const Card = styled(Animated.View)`
   border-radius:4px;
   background:#FFF;
   margin: 0 20px;
-  height:100%;
+  height:70%;
   position:absolute;
   left:0;
   right:0;
-  top: 0px;
+  top: 15%;
 `;
 
 export const CardHeader = styled.View`
@@ -51,7 +54,10 @@ export const Description = styled.Text`
 `;
 
 export const CardFooter = styled.View`
-  padding: 30px;
+  flex-direction:row;
+  justify-content:center;
+  align-items:center;
+  padding: 30px 40px;
   background: #eee;
   border-radius:4px;
 `;
@@ -59,6 +65,7 @@ export const CardFooter = styled.View`
 export const Annotation = styled.Text`
   font-size: 12px;
   color: #333;
+  margin-left:10px
 `;
 
 export const HeaderTitle = styled.Text`

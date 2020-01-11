@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {Animated, Dimensions} from 'react-native';
+import {Animated, Dimensions, View} from 'react-native';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
 
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
@@ -19,7 +19,7 @@ import {
   Title,
   HeaderTitle,
   Description,
-  Annotation,
+  Annotation
 } from './style';
 
 
@@ -72,25 +72,20 @@ export default function Main() {
       
     }
   }
-  let cardSize = 0;
 
-  function getCardSize (event){
-    cardSize = event.nativeEvent.layout.height;
-    alert("lerolero");
-  };
 
   return (
     
     <Container>
       <Header />
-      <Content>
-        <Menu translateY={translateY}/>
 
+      <Menu translateY={translateY} screenHeight={screenHeight}/>
+      <Content>
         <PanGestureHandler
           onGestureEvent={animatedEvent}
           onHandlerStateChange={onHandlerStateChange}
         >
-          <Card onLayout={getCardSize} style={{
+          <Card style={{
             transform:[{
               translateY: translateY.interpolate({
                 inputRange: [-350,0, 380],
@@ -111,9 +106,11 @@ export default function Main() {
               <Description>R$ 253.611,50</Description>
             </CardContent>
             <CardFooter>
+              <Icon name="attach-money" size={20} color="#666"/>
               <Annotation>
                 Transferência de R$250.000,00 recebida de Jair Messias Bolsonaro
               </Annotation>
+              <Icon name="keyboard-arrow-right" size={20} color="#666"/>
             </CardFooter>
           </Card>
         </PanGestureHandler>
