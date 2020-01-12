@@ -62,11 +62,16 @@ export const CardFooter = styled.View`
   border-radius:4px;
 `;
 
+export const AnimatedIcon = styled(Animated.View)`
+
+`;
+
 export const Annotation = styled.Text`
   font-size: 12px;
   color: #333;
   margin-left:10px
 `;
+
 
 export const HeaderTitle = styled.Text`
   font-size:18px;
@@ -74,3 +79,5 @@ export const HeaderTitle = styled.Text`
   color:#999;
 
 `;
+
+

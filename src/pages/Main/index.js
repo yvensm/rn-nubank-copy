@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {Animated, Dimensions, View, StyleSheet, Alert} from 'react-native';
+import {Animated, Dimensions, StyleSheet, Alert} from 'react-native';
 import {
   PanGestureHandler,
   State,
@@ -25,6 +25,7 @@ import {
   HeaderTitle,
   Description,
   Annotation,
+  AnimatedIcon,
 } from './style';
 
 export default function Main() {
@@ -82,17 +83,17 @@ export default function Main() {
   }
 
   const moneyVisibility = new Animated.Value(0);
-  let moneyDisplay = false;
+  const [displayIcon, setDisplayIcon] = useState({display:"none"})
+  let moneyDisplayOn = false;
 
 
   function moneyDisplayHandler(){
-    moneyDisplay= !moneyDisplay;
-
+    moneyDisplayOn= !moneyDisplayOn;
+    
     Animated.timing(moneyVisibility,{
-      toValue: moneyDisplay ? 150 : 0,
+      toValue: moneyDisplayOn ? 150 : 0,
       duration: 300,
     }).start();
-
   }
 
   const styleSheet = {
@@ -103,11 +104,25 @@ export default function Main() {
       }),
       backgroundColor: moneyVisibility.interpolate({
         inputRange:[0,150],
-        outputRange:['rgba(20,20,20,0.1)','rgba(20,20,20,0)'],
+        outputRange:['rgba(10,10,10,0.05)','rgba(10,10,10,0)'],
       }),
-      }
-    }
-  return (
+      },
+      visibilityIconOn:{
+        opacity: moneyVisibility.interpolate({
+          inputRange:[0,150],
+          outputRange:[1,0],
+        }),
+      },
+      visibilityIconOff:{
+        opacity: moneyVisibility.interpolate({
+          inputRange:[0,150],
+          outputRange:[0,1]
+        }),
+        position:"absolute"
+      },
+    };
+
+    return (
     <Container>
       <Header />
 
@@ -145,7 +160,12 @@ export default function Main() {
                   alignItems: 'center',
                 }}
                 onPress={moneyDisplayHandler}>
-                <Icon name="visibility-off" size={28} color="#666" />
+                <AnimatedIcon style={styleSheet.visibilityIconOff}>
+                  <Icon name='visibility-off' size={28} color="#666"/>
+                </AnimatedIcon>
+                <AnimatedIcon style={styleSheet.visibilityIconOn}>
+                  <Icon name='visibility' size={28} color="#666"/>
+                </AnimatedIcon>
               </BaseButton>
             </CardHeader>
             <CardContent>
